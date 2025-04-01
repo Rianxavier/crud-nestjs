@@ -1,13 +1,13 @@
 import { compare } from 'bcrypt';
-import { UserRespositoryInMemory } from '../../repositories/UserRepositoryInMemory';
 import { CreateUserUseCase } from './createUserUseCase';
+import { UserRepositoryInMemory } from '../../repositories/UserRepositoryInMemory';
 
 let createUserUseCase: CreateUserUseCase;
-let userRespositoryInMemory: UserRespositoryInMemory;
+let userRespositoryInMemory: UserRepositoryInMemory;
 
 describe('Create User', () => {
   beforeEach(() => {
-    userRespositoryInMemory = new UserRespositoryInMemory();
+    userRespositoryInMemory = new UserRepositoryInMemory();
     createUserUseCase = new CreateUserUseCase(userRespositoryInMemory);
   });
 
