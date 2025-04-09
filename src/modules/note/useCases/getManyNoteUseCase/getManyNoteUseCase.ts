@@ -6,7 +6,7 @@ interface getManyRequest {
   perPage?: string;
 }
 
-export class GetManyUseCase {
+export class GetManyNoteUseCase {
   constructor(private noteRepository: NoteRepository) {}
 
   async execute({ userId, page, perPage }: getManyRequest) {

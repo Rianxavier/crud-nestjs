@@ -1,16 +1,16 @@
 import { makeUser } from 'src/modules/user/factories/userFactory';
 import { makeNote } from '../../factories/noteFactory';
 import { NoteRepositoryInMemory } from '../../repositories/noteRepositoryInMemory';
-import { GetManyUseCase } from './getManyUseCase';
 import { Note } from '../../entities/note';
+import { GetManyNoteUseCase } from './GetManyNoteUseCase';
 
 let noteRepositoryInMemory: NoteRepositoryInMemory;
-let getManyUseCase: GetManyUseCase;
+let getManyNoteUseCase: GetManyNoteUseCase;
 
 describe('Get many Note', () => {
   beforeEach(() => {
     noteRepositoryInMemory = new NoteRepositoryInMemory();
-    getManyUseCase = new GetManyUseCase(noteRepositoryInMemory);
+    getManyNoteUseCase = new GetManyNoteUseCase(noteRepositoryInMemory);
   });
 
   it('Should be able to get many note by user ID', async () => {
@@ -20,7 +20,7 @@ describe('Get many Note', () => {
 
     noteRepositoryInMemory.notes = notes;
 
-    const result = await getManyUseCase.execute({ userId: user.id });
+    const result = await getManyNoteUseCase.execute({ userId: user.id });
 
     expect(result).toEqual(notes);
   });
@@ -35,7 +35,7 @@ describe('Get many Note', () => {
 
     noteRepositoryInMemory.notes = notes;
 
-    const result = await getManyUseCase.execute({ userId: user1.id });
+    const result = await getManyNoteUseCase.execute({ userId: user1.id });
 
     expect(result).toHaveLength(5);
   });
@@ -47,7 +47,7 @@ describe('Get many Note', () => {
 
     noteRepositoryInMemory.notes = notes;
 
-    const result = await getManyUseCase.execute({
+    const result = await getManyNoteUseCase.execute({
       userId: user.id,
       perPage: '8',
     });
@@ -66,7 +66,7 @@ describe('Get many Note', () => {
 
     let result: Note[];
 
-    result = await getManyUseCase.execute({
+    result = await getManyNoteUseCase.execute({
       userId: user.id,
       perPage: '5',
       page: '2',
@@ -74,7 +74,7 @@ describe('Get many Note', () => {
 
     expect(result[0].title).toEqual('page 2');
 
-    result = await getManyUseCase.execute({
+    result = await getManyNoteUseCase.execute({
       userId: user.id,
       perPage: '5',
       page: '1',
