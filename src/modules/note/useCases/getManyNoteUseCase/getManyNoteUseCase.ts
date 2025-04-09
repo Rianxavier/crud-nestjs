@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { NoteRepository } from '../../repositories/noteRepository';
 
 interface getManyRequest {
@@ -6,6 +7,7 @@ interface getManyRequest {
   perPage?: string;
 }
 
+@Injectable()
 export class GetManyNoteUseCase {
   constructor(private noteRepository: NoteRepository) {}
 
