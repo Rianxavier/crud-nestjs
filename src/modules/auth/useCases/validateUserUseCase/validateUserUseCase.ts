@@ -1,6 +1,7 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { compare } from 'bcrypt';
 import { UserRepository } from 'src/modules/user/repositories/UserRepository';
+import { AuthValuesIncorrectException } from '../../exceptions/AuthValuesIncorrectException';
 
 interface ValidateUserRequest {
   email: string;
@@ -20,6 +21,6 @@ export class ValidateUserUseCase {
       if (isPasswordMatched) return user;
     }
 
-    throw new UnauthorizedException('Email ou senha incorretos');
+    throw new AuthValuesIncorrectException();
   }
 }
